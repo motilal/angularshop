@@ -1,0 +1,48 @@
+/*!
+ * Extend Bootstrap v2.3.1 to provide cell alignment (doh)
+ *
+ */
+.table td.tdRight,.table th.thRight {
+    text-align: right;
+}
+.table td.tdCenter,.table th.thCenter {
+    text-align: center;
+}
+.table-nonfluid {
+    width: auto;
+}
+.qty-input{
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+    min-height: 30px;
+    border-radius: 4px 0 0 4px; 
+    width: 23.0769%;
+}
+.table{
+    margin-bottom: 0;
+}
+dir-pagination-controls {
+    float: right;
+}
+table .sorting_desc {
+    background-image: url("../img/sort_desc.png");
+    background-position: right center;
+    background-repeat: no-repeat;
+}
+table .sorting_asc {
+    background-image: url("../img/sort_asc.png");
+    background-position: right center;
+    background-repeat: no-repeat;
+}
+.search-input {
+    background-image: url("../img/searchicon.png");
+    background-position: 10px 12px;
+    background-repeat: no-repeat;
+    border: 1px solid #ddd;
+    font-size: 15px;
+    margin-bottom: 12px;
+    padding: 12px 20px 12px 40px;
+    width: 100%;
+}

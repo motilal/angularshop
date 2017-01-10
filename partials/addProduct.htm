@@ -1,0 +1,70 @@
+<div class="col-md-6">
+    <form name="addForm" ng-submit="saveData(addForm)" enctype="multipart/form-data" novalidate="">
+        <div class="text-center">
+            <img src="{{imagesrc}}" style="width: 200px;height: 200px;border-radius: 50%;">
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : addForm.name.$invalid && submitted}">
+            <label for="name">Name:</label>
+            <input type="text" name="name" ng-model="name" class="form-control" ng-minlength="5" ng-maxlength="20" required>
+            <span class="text-danger" ng-show="submitted && addForm.name.$error.required">
+                This is required field.
+            </span>
+            <span class="text-danger" ng-show="addForm.name.$error.minlength">
+                Name is too short.
+            </span>
+            <span class="text-danger" ng-show="addForm.name.$error.maxlength">
+                Name is too long.
+            </span>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : addForm.description.$invalid && submitted}">
+            <label for="description">Description</label>
+            <textarea ng-model="description" name="description" class="form-control" ng-maxlength="1000"></textarea>
+            <span class="pull-right" ng-show="description.length > 0">Remaining : {{1000 - description.length}}</span>
+            <span class="text-danger" ng-show="addForm.description.$error.maxlength">
+                Description is too long.
+            </span> 
+        </div> 
+
+        <div class="form-group" ng-class="{ 'has-error' : addForm.price.$invalid && submitted}">
+            <label for="description">Price</label>
+            <div class="input-group"> 
+                <span class="input-group-addon">$</span>
+                <input type="text" class="form-control" ng-model="price"  name="price" ng-pattern="/^[0-9]{1,7}$/" required>
+            </div>
+            <span class="text-danger" ng-show="addForm.price.$error.pattern">
+                Please enter valid number.
+            </span>
+            <span class="text-danger" ng-show="submitted && addForm.price.$error.required">
+                This is required field.
+            </span>            
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : addForm.sku.$invalid && submitted}">
+            <label for="sku">Sku</label>
+            <input type="sku" class="form-control" watch-me="{{product_id}}" name="sku" ng-model="sku" autocomplete="off" username-available required>
+            <span class="text-danger" ng-show="submitted && addForm.sku.$error.required">This is required field.</span>
+            <div class="text-danger"  ng-if="addForm.$pending.usernameExists">checking....</div>
+            <div class="text-danger"  ng-if="addForm.$error.usernameExists">sku exists already</div>
+        </div>  
+
+        <div class="form-group"> 
+            <label for="image">Image</label> 
+            <input type="file" name="image" file-model="imagefile" valid-file ng-model="image" ng-required="true">
+            <span class="text-danger" ng-show="submitted && addForm.image.$error.required">
+                This is required field.
+            </span>    
+            <span class="text-danger" ng-show="addForm.image.$error.validFile">
+                Unsupported file extension.
+            </span>  
+        </div>  
+        <div class="form-group">
+            <button type="submit" class="btn btn-default">
+                <span ng-if="product_id">Update</span>
+                <span ng-if="!product_id">Add</span>
+            </button>
+            <button onclick="window.location.href = 'default.htm'" type="button" class="btn btn-default">Cancel </button>
+        </div>
+    </form> 
+</div>

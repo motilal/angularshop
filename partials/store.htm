@@ -1,0 +1,67 @@
+<div class="rows" style="float: right; margin-bottom: 8px;">
+    <a href="default.htm#/add_product">
+        <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#filter-panel">
+            <span class="glyphicon glyphicon-plus"></span> Add Product
+        </button>
+    </a>
+</div>
+
+<input ng-model="search" placeholder="Search for names.." class="search-input">
+
+
+
+<table class="table table-bordered">
+    <tr class="well">
+        <td class="tdRight" colspan="4" >
+            <a href="default.htm#/cart" title="go to shopping cart" ng-disabled="totalItem < 1">
+                <i class="icon-shopping-cart" />
+                <b>{{totalItem}}</b> items, <b>{{totalPrice| currency}}</b>
+            </a>
+        </td>
+    </tr>
+    <tr class="well">
+        <th class="thCenter" width="10%">Image</th> 
+        <th width="50%" ng-click="sortProdcut('name')" ng-class="{'sorting_desc' : (reverse == true && keyName == 'name'),'sorting_asc' : (reverse == false && keyName == 'name')}">Name</th>
+        <th class="thCenter" width="10%" ng-click="sortProdcut('price')" ng-class="{'sorting_desc' : (reverse == true && keyName == 'price'),'sorting_asc' : (reverse == false && keyName == 'price')}">Price</th>
+        <th class="thCenter" width="10%">Action</th>
+    </tr>
+    <!-- empty cart message -->
+    <tr ng-show="(products | filter:search).length == 0">
+        <td class="tdCenter" colspan="4">
+            No product found.
+        </td>
+    </tr>
+    <tr dir-paginate="product in products | filter:search | orderBy : keyName : reverse | itemsPerPage:10" >
+        <td class="tdCenter"><img ng-src="{{product.image}}" alt="{{product.name}}" /></td>
+        <td>
+            <a href="#/products/{{product.id}}"><b>{{product.name}}</b></a><br />
+            {{product.description}}
+        </td>
+        <td class="tdCenter">
+            {{product.price| currency}}
+        </td> 
+        <td class="tdCenter"> 
+            <a href="" title="Add To Cart" ng-click="addItem(product.sku, product.name, product.price, 1)">
+                <i class="glyphicon glyphicon-plus-sign" />
+            </a>
+
+            <a href="default.htm#/edit_product/{{product.id}}" ng-click="editProduct(product.id);">
+                <i class="glyphicon glyphicon-pencil" />
+            </a>
+
+            <a href="" ng-click="deleteProduct(product.id);">
+                <i class="glyphicon glyphicon-remove" />
+            </a> 
+
+        </td>
+    </tr>
+    <tr class="well">
+        <td class="tdRight" colspan="4">
+            <a href="default.htm#/cart" title="go to shopping cart" ng-disabled="totalItem < 1">
+                <i class="icon-shopping-cart" />
+                <b>{{totalItem}}</b> items, <b>{{totalPrice| currency}}</b>
+            </a>
+        </td>
+    </tr>
+</table>
+<dir-pagination-controls boundary-links="true"></dir-pagination-controls>
